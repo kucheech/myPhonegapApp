@@ -22,13 +22,14 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" />
-    <!-- Good default declaration:
+  <meta charset="utf-8" />
+  <!-- <meta name="format-detection" content="telephone=no" /> -->
+  <!-- <meta name="msapplication-tap-highlight" content="no" /> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" /> -->
+  <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *"  /> -->
+  <!-- Good default declaration:
     * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
     * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
     * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
@@ -36,25 +37,76 @@
         * Enable eval(): add 'unsafe-eval' to default-src
     * Create your own at http://cspisawesome.com
     -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <title>Hello World</title>
+  <!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
+  <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+  <script src="js/jquery-1.11.1.min.js"></script>
+  <script src="js/jquery.mobile-1.4.5.min.js"></script>
+  <title>Hello World</title>
 </head>
 
 <body>
-    <div class="app">
-        <h1>PhoneGap</h1>
-        <div id="deviceready" class="blink">
-            <p class="event listening">Connecting to Device</p>
-            <p class="event received">Device is Ready</p>
-        </div>
+
+  <!-- Start of first page -->
+  <div data-role="page" id="foo">
+
+    <div data-role="header">
+      <h1>Foo</h1>
     </div>
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript">
-        app.initialize();
-    </script>
+    <!-- /header -->
+
+    <div role="main" class="ui-content">
+      <p>I'm first in the source order so I'm shown as the page.</p>
+      <p>View internal page called
+        <a href="#bar">bar</a>
+      </p>
+    </div>
+    <!-- /content -->
+
+    <div data-role="footer" data-position="fixed">
+      <h4>Page Footer</h4>
+    </div>
+    <!-- /footer -->
+  </div>
+  <!-- /page -->
+
+  <!-- Start of second page -->
+  <div data-role="page" id="bar">
+
+    <div data-role="header">
+      <h1>Bar</h1>
+    </div>
+    <!-- /header -->
+
+    <div role="main" class="ui-content">
+      <p>I'm the second in the source order so I'm hidden when the page loads. I'm just shown if a link that references my id
+        is beeing clicked.</p>
+      <p>
+        <a href="#foo">Back to foo</a>
+      </p>
+    </div>
+    <!-- /content -->
+
+    <div data-role="footer" data-position="fixed">
+      <h4>Page Footer</h4>
+    </div>
+    <!-- /footer -->
+  </div>
+  <!-- /page -->
+
+  <!-- <div class="app">
+    <h1>PhoneGap</h1>
+    <div id="deviceready" class="blink">
+      <p class="event listening">Connecting to Device</p>
+      <p class="event received">Device is Ready</p>
+    </div>
+  </div>
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript">
+    app.initialize();
+  </script> -->
 </body>
 
 </html>
